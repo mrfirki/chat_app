@@ -8,7 +8,8 @@
     <h2>Resources</h2>
     <ul>
       <li>
-        <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a>
+        <%# <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a> %>
+        <button class="btn btn-success">this is button</button>
       </li>
       <li>
         <a href="https://github.com/phoenixframework/phoenix">Source</a>
