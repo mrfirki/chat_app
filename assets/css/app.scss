@@ -1,0 +1,9 @@
+/* This file is for your main application css. */
+
+@import "./phoenix.css";
+
+$bgcolor: #123456;
+
+body {
+  background-color: $bgcolor;
+}
