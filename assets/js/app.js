@@ -11,6 +11,7 @@ import css from "../css/app.scss"
 //
 import "phoenix_html";
 import 'bootstrap';
+import '@fortawesome/fontawesome-free';
 
 // Import local files
 //
