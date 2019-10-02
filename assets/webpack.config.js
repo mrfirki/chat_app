@@ -45,7 +45,6 @@ module.exports = (env, options) => ({
           },
           'postcss-loader'
         ]
-        // use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader' , "postcss-loader"]
       },
       {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
@@ -55,6 +54,16 @@ module.exports = (env, options) => ({
             name: '[name].[ext]',
             outputPath: '../fonts'
           }
+        }]
+      },
+      {
+        test: require.resolve('jquery'),
+        use: [{
+            loader: 'expose-loader',
+            options: 'jQuery'
+        }, {
+            loader: 'expose-loader',
+            options: '$'
         }]
       }
     ]
