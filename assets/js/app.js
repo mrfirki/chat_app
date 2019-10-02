@@ -15,6 +15,10 @@ import '@fortawesome/fontawesome-free';
 
 $(".alert").alert();
 
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
 // Import local files
 //
 // Local files can be imported directly using relative paths, for example:
