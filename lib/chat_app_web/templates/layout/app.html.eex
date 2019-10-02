@@ -9,8 +9,15 @@
   </head>
   <body>
     <main role="main" class="container">
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <div class="d-flex flex-column flex-md row align-items-center p-3 px-md-4 bg-dark">
+        <h3 class="my-0 mr-md-auto font-weight-normal">
+          <%= link "Chat App", to: Routes.room_path(@conn, :index), class: "navbar-brand text-highlight" %>
+        </h3>
+      </div>
+      
+
+      <div class="alert alert-info alert-dismissible" role="alert"><%= get_flash(@conn, :info) %></div>
+      <div class="alert alert-danger alert-dismissible" role="alert"><%= get_flash(@conn, :error) %></div>
       <%= render @view_module, @view_template, assigns %>
     </main>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
