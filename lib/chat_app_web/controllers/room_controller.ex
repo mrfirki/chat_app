@@ -2,7 +2,6 @@ defmodule ChatAppWeb.RoomController do
   use ChatAppWeb, :controller
   alias ChatApp.Talk.Room
   alias ChatApp.Talk
-  alias ChatApp.Repo
 
   def index(conn, _params) do
     rooms = Talk.list_rooms()
