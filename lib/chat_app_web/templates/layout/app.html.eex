@@ -18,6 +18,7 @@
         </nav>
         <%= link "Sign Out", to: Routes.session_path(@conn, :delete), method: :delete, class: "btn btn-outline-primary" %>
       <% else %>
+        <%= link "Sign In", to: Routes.session_path(@conn, :new), class: "btn btn-outline-primary ml-md-3" %>
         <%= link "Sign Up", to: Routes.registration_path(@conn, :new), class: "btn btn-outline-primary ml-md-3" %>
       <% end %>
     </div>
