@@ -2,6 +2,7 @@ defmodule ChatAppWeb.RoomController do
   use ChatAppWeb, :controller
   alias ChatApp.Talk.Room
   alias ChatApp.Talk
+  alias ChatAppWeb.Plugs.AuthUser
 
   plug ChatAppWeb.Plugs.AuthUser when action not in [:index]
   plug :authorized_user when action in [:edit, :update, :delete]

@@ -5,7 +5,6 @@ defmodule ChatAppWeb.Plugs.AuthUser do
   alias ChatAppWeb.Router.Helpers, as: Routes
 
   def init(_) do
-
   end
 
   def call(conn, _params) do
@@ -17,5 +16,9 @@ defmodule ChatAppWeb.Plugs.AuthUser do
       |> redirect(to: Routes.session_path(conn, :new))
       |> halt()
     end
+  end
+
+  def can_access?(user, room) do
+    user && user.id == room.user_id
   end
 end

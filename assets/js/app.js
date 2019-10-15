@@ -12,6 +12,7 @@ import css from "../css/app.scss"
 import "phoenix_html";
 import 'bootstrap';
 import '@fortawesome/fontawesome-free';
+import socket from "./socket"
 
 $(".alert").alert();
 
@@ -22,4 +23,4 @@ $(function () {
 // Import local files
 //
 // Local files can be imported directly using relative paths, for example:
-// import socket from "./socket"
+

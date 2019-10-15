@@ -6,7 +6,20 @@
   <%= @room.description %>
 </span>
 
-<div>
-  <%= link "Edit", to: Routes.room_path(@conn, :edit, @room.id), class: "btn btn-primary" %>
-  <%= link "Delete", to: Routes.room_path(@conn, :delete, @room), data: [confirm: "Do you really want to delete ?"], method: :delete, class: "btn btn-danger" %>
-</div>
+
+  <div>
+    <%= link "Edit", to: Routes.room_path(@conn, :edit, @room.id), class: "btn btn-primary" %>
+    <%= link "Delete", to: Routes.room_path(@conn, :delete, @room), data: [confirm: "Do you really want to delete ?"], method: :delete, class: "btn btn-danger" %>
+  </div>
+
+
+<ul class="list-group mt-5" id="display"></ul>
+
+<form class="input-group mt-3" id="message-form">
+  <input type="text" class="form-control" id="message-body" placeholder="Input message for <%= @room.name %>"/>
+  <div class="input-group-append">
+    <button class="btn btn-outline-info" id="message-button">
+      Send
+    </button>
+  </div>
+</form>
