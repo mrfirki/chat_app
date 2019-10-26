@@ -6,7 +6,7 @@
 //
 // Pass the token on params as below. Or remove it
 // from the params if you are not using authentication.
-import {Socket} from "phoenix"
+import {Socket, Presence} from "phoenix"
 
 let socket = new Socket("/socket", {params: {token: window.userToken}})
 
@@ -53,14 +53,15 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 //
 // Finally, connect to the socket:
 let roomId = window.roomId
-console.log(roomId)
+let presences = {}
+// console.log(roomId)
 socket.connect()
-console.log(socket)
+// console.log(socket)
 
 if (roomId) {
   // Now that you are connected, you can join channels with a topic:
   let channel = socket.channel(`room:${roomId}`, {})
-  console.log(channel)
+  // console.log(channel)
   channel.join()
     .receive("ok", resp => { console.log("Joined successfully", resp) })
     .receive("error", resp => { console.log("Unable to join", resp) })
@@ -69,8 +70,20 @@ if (roomId) {
 
 
   channel.on(`room:${roomId}:new_message`, (message) => {
-    console.log("message yo",message)
+    // console.log("message yo",message)
     displayMessage(message)
+  })
+
+  channel.on("presence_state", state => {
+    presences = Presence.syncState(presences, state)
+    // console.log(presences)
+    displayUsers(presences)
+  })
+
+  channel.on("presence_diff", diff => {
+    presences = Presence.syncDiff(presences, diff)
+    // console.log(presences)
+    displayUsers(presences)
   })
 
   document.querySelector("#message-form").addEventListener('submit', (e) => {
@@ -94,6 +107,19 @@ if (roomId) {
     `
 
     document.querySelector("#display").innerHTML += template
+  }
+
+  const displayUsers = (presences) => {
+    let usersOnline = Presence.list(presences, (_id, {
+      metas: [
+        user, ...rest
+      ]
+    }) => {
+      return `
+        <div id="user-${user.user_id}"><strong class="text-secondary">${user.username}</strong></div>
+      `
+    }).join("")
+    document.querySelector("#users-online").innerHTML = usersOnline
   }
 }
 
