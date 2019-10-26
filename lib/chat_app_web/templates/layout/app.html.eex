@@ -32,7 +32,9 @@
     <% end %>
     <main role="main" class="container">
       <%= render @view_module, @view_template, assigns %>
+      <p><%= assigns[:user_token] %></p>
     </main>
+    <script>window.userToken = "<%= assigns[:user_token] %>"</script>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

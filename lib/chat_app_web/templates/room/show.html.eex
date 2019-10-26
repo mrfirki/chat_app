@@ -23,3 +23,7 @@
     </button>
   </div>
 </form>
+
+<script>
+  window.roomId = "<%= @room.id %>"
+</script>
