@@ -66,7 +66,10 @@ if (roomId) {
   let channel = socket.channel(`room:${roomId}`, {})
   // console.log(channel)
   channel.join()
-    .receive("ok", resp => { console.log("Joined successfully", resp) })
+    .receive("ok", resp => { 
+      console.log("Joined successfully", resp)
+      resp.messages.reverse().map(msg => displayMessage(msg))
+    })
     .receive("error", resp => { console.log("Unable to join", resp) })
 
 
