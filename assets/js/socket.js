@@ -59,6 +59,9 @@ socket.connect()
 // console.log(socket)
 
 if (roomId) {
+  const timeout = 3000
+  var typingTimer
+  let userTyping = false
   // Now that you are connected, you can join channels with a topic:
   let channel = socket.channel(`room:${roomId}`, {})
   // console.log(channel)
@@ -96,6 +99,36 @@ if (roomId) {
     input.value = ''
   })
 
+  document.querySelector("#message-body").addEventListener("keydown", () => {
+    userStartTyping()
+    clearTimeout(typingTimer)
+  })
+
+  document.querySelector("#message-body").addEventListener("keyup", ()=> {
+    clearTimeout(typingTimer)
+    typingTimer = setTimeout(userStopTyping, timeout)
+  })
+
+  const userStartTyping = () => {
+    if (userTyping) {
+      return 
+    }
+
+    userTyping = true
+    channel.push('user:typing', {
+      typing: true
+    })
+  }
+
+  const userStopTyping = () => {
+    clearTimeout(typingTimer)
+    userTyping = false
+
+    channel.push('user:typing', {
+      typing: false
+    })
+  }
+
   const displayMessage = (msg) => {
     let template = `
       <li class="list-group-item">
@@ -115,8 +148,12 @@ if (roomId) {
         user, ...rest
       ]
     }) => {
+      var typingTemplate = ''
+      if (user.typing) {
+        typingTemplate = '<i>(Typing...)</i>'
+      }
       return `
-        <div id="user-${user.user_id}"><strong class="text-secondary">${user.username}</strong></div>
+        <div id="user-${user.user_id}"><strong class="text-secondary">${user.username}</strong>${typingTemplate}</div>
       `
     }).join("")
     document.querySelector("#users-online").innerHTML = usersOnline
