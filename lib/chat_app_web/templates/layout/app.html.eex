@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
   </head>
   <body>
-    <div class="d-flex flex-column flex-md row align-items-center p-3 px-md-4 bg-dark">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 bg-dark">
       <h3 class="my-0 mr-md-auto font-weight-normal">
         <%= link "Chat App", to: Routes.room_path(@conn, :index), class: "navbar-brand text-highlight" %>
       </h3>
@@ -18,12 +18,11 @@
         </nav>
         <%= link "Sign Out", to: Routes.session_path(@conn, :delete), method: :delete, class: "btn btn-outline-primary" %>
       <% else %>
-        <nav>
-          <%= link "Sign In", to: Routes.session_path(@conn, :new), class: "btn btn-outline-primary ml-md-3" %>
-          <%= link "Sign Up", to: Routes.registration_path(@conn, :new), class: "btn btn-outline-primary ml-md-3" %>
-        </nav>
+        <%= link "Sign In", to: Routes.session_path(@conn, :new), class: "btn btn-outline-primary ml-md-3" %>
+        <%= link "Sign Up", to: Routes.registration_path(@conn, :new), class: "btn btn-outline-primary ml-md-3" %>
       <% end %>
     </div>
+    
     <%= unless is_nil(get_flash(@conn, :info)) do %>
       <div class="alert alert-info alert-dismissible" role="alert"><%= get_flash(@conn, :info) %></div>
     <% end %>
@@ -32,7 +31,6 @@
     <% end %>
     <main role="main" class="container">
       <%= render @view_module, @view_template, assigns %>
-      <p><%= assigns[:user_token] %></p>
     </main>
     <script>window.userToken = "<%= assigns[:user_token] %>"</script>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
